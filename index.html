@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plataforma de Fisiología Cardiovascular</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<script type="module"
+src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script src="js/app.js"></script>
+</head>
+
+<body>
+
+<header>
+PLATAFORMA UNIVERSITARIA DE FISIOLOGÍA CARDIOVASCULAR
+</header>
+<link rel="stylesheet" href="css/style.css">
+<div class="sidebar">
+
+    <div class="nav" onclick="go('dashboard')">
+        <span class="icon">🏠</span>
+        <span class="text">Dashboard</span>
+    </div>
+
+    <div class="nav" onclick="window.location.href='anatomia.html'">
+        <span class="icon">🦴</span>
+        <span class="text">Anatomía</span>
+    </div>
+
+    <div class="nav" onclick="go('histologia')">
+        <span class="icon">🔬</span>
+        <span class="text">Histología</span>
+    </div>
+
+    <div class="nav" onclick="go('inervacion')">
+        <span class="icon">🧠</span>
+        <span class="text">Inervación</span>
+    </div>
+
+    <div class="nav" onclick="go('circulacion')">
+        <span class="icon">🩸</span>
+        <span class="text">Circulación</span>
+    </div>
+
+    <div class="nav" onclick="go('quiz')">
+        <span class="icon">📋</span>
+        <span class="text">Cuestionario</span>
+    </div>
+
+</div>
+
+<main>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="card">
+
+<h2>Dashboard fisiológico</h2>
+
+<div class="grid">
+
+<div class="box">
+Gasto Cardíaco<br>
+<strong id="gc">4.9</strong> L/min
+</div>
+
+<div class="box">
+PAM<br>
+<strong id="pam">93</strong> mmHg
+</div>
+
+<div class="box">
+VO₂<br>
+<strong id="vo2">250</strong> ml/min
+</div>
+
+<div class="box">
+Estado<br>
+<strong id="estado">Reposo</strong>
+</div>
+
+</div>
+
+</section>
+
+<!-- HEMODINAMICA -->
+<section class="card">
+
+<h2>Control hemodinámico</h2>
+
+<label>Frecuencia Cardíaca</label>
+<input id="fc" type="range" min="40" max="200" value="70" oninput="update()">
+
+<label>Volumen Sistólico</label>
+<input id="vs" type="range" min="30" max="150" value="70" oninput="update()">
+
+<label>Resistencia Vascular</label>
+<input id="rvp" type="range" min="10" max="40" value="20" oninput="update()">
+
+<button onclick="reset()">Reset</button>
+
+</section>
+
+<!-- CORAZON -->
+<section class="card">
+
+<h2>Corazón funcional</h2>
+
+<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+
+<model-viewer
+id="heart"
+src="modelos/corazonhum.glb"
+auto-rotate
+camera-controls>
+</model-viewer>
+
+<p class="small">Modelo adaptado a carga hemodinámica</p>
+
+</div>
+
+</section>
+
+<!-- ECG -->
+<section class="card">
+
+<h2>ECG fisiológico (P-QRS-T)</h2>
+<canvas id="ecg"></canvas>
+
+</section>
+
+<!-- HISTOLOGIA -->
+<section id="histologia" class="card">
+<h2>Histología cardíaca</h2>
+<p>
+El miocardio está formado por cardiomiocitos estriados con discos intercalares que permiten
+la sincronización eléctrica y mecánica del tejido.
+</p>
+</section>
+
+<!-- ========================= -->
+<!-- INERVACIÓN CARDÍACA -->
+<!-- ========================= -->
+
+<section id="inervacion" class="section-card">
+    <div class="section-header">
+        <h2>Inervación Cardíaca</h2>
+        <div class="section-line"></div>
+    </div>
+
+    <div class="inervacion-container">
+
+        <!-- TEXTO -->
+        <div class="inervacion-texto">
+
+            <p>
+                Aunque el corazón posee automatismo propio gracias a su sistema
+                de conducción, su actividad es regulada continuamente por el
+                <strong>sistema nervioso autónomo</strong>.
+            </p>
+
+            <p>
+                El <span class="simpatico">sistema nervioso simpático</span>
+                aumenta la frecuencia cardíaca, la velocidad de conducción y la
+                fuerza de contracción del miocardio, permitiendo responder a
+                situaciones de esfuerzo físico o estrés.
+            </p>
+
+            <p>
+                El <span class="parasimpatico">sistema nervioso parasimpático</span>,
+                a través del nervio vago, disminuye la frecuencia cardíaca y
+                favorece estados de reposo y recuperación.
+            </p>
+
+            <p>
+                La interacción constante entre ambos sistemas permite ajustar el
+                gasto cardíaco según las necesidades metabólicas del organismo.
+            </p>
+
+            <div class="info-cards">
+
+                <div class="info-card simpatico-card">
+                    <h3>🔴 Simpático</h3>
+                    <ul>
+                        <li>↑ Frecuencia cardíaca</li>
+                        <li>↑ Fuerza de contracción</li>
+                        <li>↑ Velocidad de conducción</li>
+                        <li>Respuesta al ejercicio y estrés</li>
+                    </ul>
+                </div>
+
+                <div class="info-card parasimpatico-card">
+                    <h3>🔵 Parasimpático</h3>
+                    <ul>
+                        <li>↓ Frecuencia cardíaca</li>
+                        <li>↓ Velocidad de conducción</li>
+                        <li>Favorece el reposo</li>
+                        <li>Recuperación fisiológica</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- GIF -->
+        <div class="inervacion-gif-container">
+
+            <div class="gif-frame">
+
+    <img
+        src="assets/corazon.gif"
+        alt="Animación de la inervación cardíaca"
+        class="inervacion-gif"
+    >
+
+</div>
+
+            <p class="gif-caption">
+                Regulación autónoma del corazón mediante el sistema nervioso
+                simpático y parasimpático.
+            </p>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz" class="card">
+<h2>Cuestionario (20 preguntas editables)</h2>
+
+<ol>
+
+
+
+</body>
+</html>
+<a href="modulos/cardiovascular.html">
+    <button>Cardiovascular</button>
+</a>
+
+<a href="modulos/sistema_nervioso.html">
+    <button>Sistema Nervioso</button>
+</a>
+
+<a href="modulos/histologia.html">
+    <button>Histología</button>
+</a>
+
+<a href="modulos/respiratorio.html">
+    <button>Respiratorio</button>
+</main>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>
